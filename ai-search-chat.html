@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 검색 (채팅형) - 진로체험망 꿈길</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/ai-search-chat.css">
+</head>
+<body class="aichat-body">
+
+  <!-- ===================================================================
+       AI 검색 · B안 (채팅형)
+       Figma "2026꿈길main" 파일 SFR-001 페이지 > "B안"(node 2554:1847) 기반.
+       GPT/Claude 스타일로 좌측에 이전 질문(대화) 목록을 두고, 우측 채팅창에서
+       자연어로 질문하면 실제 API 호출 없이(클라이언트 목업) 검색 진행 상태를
+       순차적인 상태 메시지로 보여준 뒤 AI 답변 카드가 나타난다.
+       =================================================================== -->
+  <main class="aichat-page">
+
+    <div class="aichat-header">
+      <h1 class="aichat-title"><span class="aichat-spark">✦</span> 어떤 진로체험을 찾아볼까요?</h1>
+      <p class="aichat-subtitle">AI검색으로 쉽게 찾아보세요.</p>
+    </div>
+
+    <div class="aichat-layout">
+
+      <aside class="aichat-sidebar">
+        <div class="aichat-sidebar-head">
+          <h2>이전 대화</h2>
+          <button type="button" class="aichat-new-btn" id="aichatNewBtn" aria-label="새 대화 시작">+</button>
+        </div>
+        <div class="aichat-sidebar-list" id="aichatHistoryList"></div>
+      </aside>
+
+      <section class="aichat-window">
+        <header class="aichat-head">
+          <div class="aichat-avatar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"></circle><path d="M9 10.5v.01M15 10.5v.01M8.5 15c1 1 2.2 1.5 3.5 1.5s2.5-.5 3.5-1.5" stroke-linecap="round"></path></svg>
+          </div>
+          <div class="aichat-titles">
+            <strong>꿈길 AI 도우미</strong>
+            <span>체험 프로그램을 자연어로 물어보세요</span>
+          </div>
+        </header>
+
+        <div class="aichat-body" id="aichatBody"></div>
+
+        <div class="aichat-suggestions" id="aichatSuggestions">
+          <button type="button" class="aichat-chip" data-query="중학생이 참여할 수 있는 IT·코딩 체험 알려줘">중학생 IT·코딩 체험</button>
+          <button type="button" class="aichat-chip" data-query="강남에서 할 수 있는 의료·보건 체험 찾아줘">강남 의료·보건 체험</button>
+          <button type="button" class="aichat-chip" data-query="지금 신청 가능한 미술 체험 있어?">신청 가능한 미술 체험</button>
+        </div>
+
+        <form class="aichat-inputbar" id="aichatForm">
+          <input type="text" id="aichatInput" placeholder="예: 이번 주말 서울에서 할 수 있는 요리 체험 있어?" aria-label="AI 검색어 입력">
+          <button type="submit" class="aichat-send-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+            AI 검색
+          </button>
+        </form>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="js/ai-search-chat.js"></script>
+</body></html>

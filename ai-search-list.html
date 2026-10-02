@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 검색 (통합형) - 진로체험망 꿈길</title>
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/program-search.css">
+<link rel="stylesheet" href="css/ai-search-chat.css">
+<link rel="stylesheet" href="css/ai-search-list.css">
+</head>
+<body class="aichat-body">
+
+  <!-- ===================================================================
+       AI 검색 · 통합형
+       B안(ai-search-chat.html)의 "이전 대화" 사이드바 쉘 + A안
+       (program-search.html)의 자연어 검색창·툴바·리스트·페이지네이션을
+       하나의 독립 페이지로 합친 버전. 실제 API 호출은 없는 클라이언트
+       목업이며, 검색 로직(parseQuery/scoreProgram/matchPercent/
+       buildReasonChips)과 결과 리스트의 순차 타이핑 리빌 애니메이션은
+       program-search.js 의 로직을 그대로 이식했다.
+       =================================================================== -->
+  <main class="aichat-page aslist-page">
+
+    <div class="aichat-header">
+      <h1 class="aichat-title"><span class="aichat-spark">✦</span> 나에게 딱 맞는 진로체험을 찾아볼까요?</h1>
+    </div>
+
+    <div class="aichat-layout">
+
+      <aside class="aichat-sidebar">
+        <div class="aichat-sidebar-head">
+          <h2>이전 대화</h2>
+          <button type="button" class="aichat-new-btn" id="aslistNewBtn" aria-label="새 대화 시작">+</button>
+        </div>
+        <div class="aichat-sidebar-list" id="aslistHistoryList"></div>
+      </aside>
+
+      <section class="aslist-main">
+
+        <form class="psrch-ai-searchbar" id="aslistForm">
+          <svg class="psrch-ai-icon" viewBox="0 0 18 18" fill="none"><path d="M7.87725 4.5L9.50025 8.49975L13.5 10.1227V10.8773L9.50025 12.5002L7.87725 16.5H7.12275L5.49975 12.5002L1.5 10.8773V10.1227L5.49975 8.49975L7.12275 4.5H7.87725ZM14.5417 3.45825L16.5 4.18275V4.81725L14.5417 5.54175L13.8173 7.5H13.1827L12.4583 5.54175L10.5 4.81725V4.18275L12.4583 3.45825L13.1827 1.5H13.8173L14.5417 3.45825Z" fill="currentColor"></path></svg>
+          <input type="text" id="aslistInput" placeholder="예: 서울 중구에서 할 수 있는 현장직업체험 찾아줘">
+          <button type="submit" class="psrch-ai-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.6L19 9l-5.2 1.4L12 16l-1.8-5.6L5 9l5.2-1.4L12 2z"></path></svg>
+            AI검색
+          </button>
+        </form>
+
+        <div class="aslist-answer-area" id="aslistAnswerArea"></div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <script src="js/ai-search-list.js"></script>
+</body></html>
