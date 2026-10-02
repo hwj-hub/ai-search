@@ -1,0 +1,88 @@
+/* ===================================================================
+   program-request-detail.css — 맞춤형 프로그램 요청 상세 모달 전용 스타일
+   main.css 를 먼저 불러 색상 변수(:root)와 폰트를 공유한 뒤 사용한다.
+   .modal-backdrop 는 main.css(AI 검색 팝업)와 공용으로 사용.
+   =================================================================== */
+
+  /* ---------- 데모 트리거 화면 (실서비스에서는 신청 내역 관리 목록 화면을 사용) ---------- */
+  .pr-demo-body{background:var(--surface);min-height:100vh;padding:48px 20px;}
+  .pr-demo-wrap{max-width:900px;margin:0 auto;background:#fff;border:1px solid var(--border-gray);
+    border-radius:16px;padding:24px;}
+  .pr-demo-label{margin:0 0 14px;font-size:13px;font-weight:700;color:var(--gray-text);}
+  .pr-demo-table{width:100%;border-collapse:collapse;font-size:14px;}
+  .pr-demo-table th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--ink);color:var(--gray-text-2);
+    font-size:12.5px;font-weight:700;}
+  .pr-demo-table td{padding:14px 12px;border-bottom:1px solid var(--border-gray);color:var(--ink);vertical-align:middle;}
+  .pr-demo-table td.ellip{max-width:320px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .pr-btn-view{background:#fff;border:1.5px solid var(--brand-blue);color:var(--brand-blue-deep);
+    border-radius:8px;padding:7px 14px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;}
+  .pr-btn-view:hover{background:var(--status-blue-bg);}
+
+  /* ---------- 상태 뱃지 (승인현황 / 매칭상태) ---------- */
+  .status-pill.approval{background:var(--status-blue-bg);color:var(--status-blue-text);}
+  .status-pill.matching{background:#FFF1E8;color:var(--cat-orange);}
+  .status-pill.matched{background:#E8F8F1;color:var(--cat-green);}
+
+  /* ---------- 모달 셸 ---------- */
+  .pr-detail-modal{
+    display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.97);opacity:0;
+    width:min(680px,calc(100% - 32px));max-height:min(760px,calc(100% - 64px));
+    background:#fff;border-radius:18px;box-shadow:0 20px 60px rgba(15,23,41,.28);
+    z-index:210;flex-direction:column;overflow:hidden;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .pr-detail-modal.open{display:flex;transform:translate(-50%,-50%) scale(1);opacity:1;}
+
+  .pr-detail-head{
+    display:flex;align-items:center;justify-content:space-between;flex:none;
+    padding:22px 24px;border-bottom:1px solid var(--border-gray);
+  }
+  .pr-detail-head h3{margin:0;font-size:19px;font-weight:800;color:var(--ink);}
+  .pr-detail-close{border:none;background:var(--surface);color:var(--gray-text);width:32px;height:32px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;}
+  .pr-detail-close svg{width:16px;height:16px;}
+  .pr-detail-close:hover{background:var(--border-gray);color:var(--ink);}
+
+  .pr-detail-body{flex:1;overflow-y:auto;padding:22px 24px 6px;min-height:0;}
+
+  /* 승인현황 / 매칭상태 요약 줄 */
+  .pr-status-row{display:flex;gap:10px;margin-bottom:18px;}
+  .pr-status-item{flex:1;display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:var(--surface);border:1px solid var(--border-gray);border-radius:10px;padding:10px 14px;}
+  .pr-status-label{font-size:12.5px;font-weight:700;color:var(--gray-text);}
+
+  /* 기본 정보 2열 그리드 */
+  .pr-info-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border-gray);
+    border:1px solid var(--border-gray);border-radius:12px;overflow:hidden;margin:0 0 22px;}
+  .pr-info-cell{background:#fff;padding:12px 16px;}
+  .pr-info-cell.pr-span-2{grid-column:1 / -1;}
+  .pr-info-cell dt{margin:0 0 4px;font-size:12px;font-weight:700;color:var(--gray-text);}
+  .pr-info-cell dd{margin:0;font-size:14.5px;font-weight:600;color:var(--ink);word-break:break-all;}
+
+  /* 섹션 공통(검색태그 / 요청내용) */
+  .pr-section{margin-bottom:20px;}
+  .pr-section-title{margin:0 0 10px;font-size:13.5px;font-weight:800;color:var(--ink);}
+
+  .pr-tag-list{display:flex;flex-wrap:wrap;gap:8px;}
+  .pr-tag{display:inline-flex;align-items:center;background:#FFF1E8;color:var(--cat-orange);
+    border-radius:999px;padding:6px 14px;font-size:13px;font-weight:700;}
+
+  .pr-content-box{background:var(--surface);border:1px solid var(--border-gray);border-radius:12px;
+    padding:16px;font-size:13.5px;line-height:1.65;color:var(--gray-text-2);white-space:pre-wrap;}
+
+  /* 하단 닫기 버튼 */
+  .pr-detail-foot{flex:none;padding:16px 24px 22px;border-top:1px solid var(--border-gray);
+    display:flex;justify-content:center;}
+  .pr-btn-close{background:var(--ink);color:#fff;border:none;border-radius:10px;
+    padding:12px 48px;font-family:inherit;font-size:14.5px;font-weight:700;cursor:pointer;}
+  .pr-btn-close:hover{background:#2A3142;}
+
+  @media (max-width:520px){
+    .pr-info-grid{grid-template-columns:1fr;}
+    .pr-info-cell.pr-span-2{grid-column:auto;}
+    .pr-status-row{flex-direction:column;}
+    .pr-detail-body{padding:18px 16px 4px;}
+    .pr-detail-head{padding:18px 16px;}
+    .pr-detail-foot{padding:14px 16px 18px;}
+    .pr-btn-close{width:100%;}
+  }

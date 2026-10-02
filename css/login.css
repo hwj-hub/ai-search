@@ -1,0 +1,94 @@
+/* ===================================================================
+   login.css — 로그인 상태 전용 스타일 (계정 드롭다운 / 모바일 MY MENU 계정 카드).
+   main.css / header.css / footer.css 로드 후 마지막에 불러온다.
+   index_login.html 전용 — 회원 구분: 학교(일반교과교사) · 체험처(진로체험처) · 운영자.
+   =================================================================== */
+
+  /* ---------- 로그인 계정 영역(회원 구분: 학교/체험처/운영자) ---------- */
+  .role-school{--role-color:#84CC16;--role-color-soft:#ECFCCB;--role-color-deep:#5D8C10;}
+  .role-partner{--role-color:#F97316;--role-color-soft:#FFEDD5;--role-color-deep:#C2410C;}
+  .role-admin{--role-color:#2557D6;--role-color-soft:#DCE8FF;--role-color-deep:#1D3F99;}
+
+  .acct-timer{display:flex;align-items:center;gap:7px;font-size:13px;font-weight:600;color:#4B5563;flex:none;}
+  .acct-timer svg{width:14px;height:14px;flex:none;}
+  .acct-extend,.mnav-extend{background:#5B6472;color:#fff;border:none;border-radius:999px;padding:5px 12px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit;flex:none;}
+
+  .acct-wrap{position:relative;display:flex;align-items:center;}
+  .acct-pill{display:flex;align-items:center;gap:7px;background:#fff;border:1.5px solid var(--role-color);
+    border-radius:999px;padding:5px 12px 5px 5px;cursor:pointer;font-family:inherit;color:var(--ink);}
+  .acct-avatar{width:26px;height:26px;border-radius:50%;background:var(--role-color);color:#fff;
+    display:flex;align-items:center;justify-content:center;flex:none;}
+  .acct-avatar::before{content:"";display:block;width:14px;height:14px;background-color:#fff;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
+    -webkit-mask-size:contain;mask-size:contain;}
+  .acct-name{font-size:13.5px;font-weight:700;color:#1A1F2B;white-space:nowrap;}
+  .acct-bell{display:flex;align-items:center;color:#4B5563;flex:none;}
+  .acct-bell svg{width:16px;height:16px;}
+  .acct-chev{color:#9CA3AF;}
+
+  .acct-dropdown{
+    position:absolute;top:calc(100% + 10px);right:0;width:224px;background:#fff;
+    border:1px solid #E2E5EA;border-radius:14px;box-shadow:0 12px 28px rgba(15,23,41,.16);
+    padding:16px;z-index:85;opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;
+    transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;
+  }
+  .acct-dropdown.open{
+    opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .acct-dd-name{font-size:15px;font-weight:800;color:#111827;}
+  .acct-dd-meta{font-size:12px;color:#9CA3AF;margin-top:3px;}
+  .acct-dd-divider{height:1px;background:#EEF0F3;margin:12px 0;}
+  .acct-dd-item{display:flex;align-items:center;gap:9px;width:100%;border:none;background:none;padding:9px 4px;
+    font-family:inherit;font-size:13.5px;font-weight:600;color:#333;cursor:pointer;text-align:left;border-radius:8px;}
+  .acct-dd-item:hover{background:#F3F5F8;}
+  .acct-dd-item svg{width:17px;height:17px;flex:none;color:#6B7280;}
+  .acct-dd-logout{color:#DC2626;}
+  .acct-dd-logout svg{color:#DC2626;}
+  .acct-dd-edit{color:var(--brand-blue-deep);}
+  .acct-dd-edit svg{color:var(--brand-blue-deep);}
+
+  /* ---------- 모바일 MY MENU (로그인 상태) ---------- */
+  .mnav-head-login{justify-content:space-between;}
+  .mnav-head-title{display:flex;align-items:center;gap:8px;font-size:16px;font-weight:800;color:#111827;}
+  .mnav-head-title svg{width:20px;height:20px;color:#374151;flex:none;}
+  .mnav-user-card{padding:14px 0 18px;border-bottom:1px solid #EEF0F3;margin-bottom:8px;}
+  .mnav-user-top{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .mnav-user-avatar{width:40px;height:40px;border-radius:50%;background:var(--role-color);color:#fff;
+    display:flex;align-items:center;justify-content:center;flex:none;}
+  .mnav-user-avatar::before{content:"";display:block;width:21px;height:21px;background-color:#fff;
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center;
+    -webkit-mask-size:contain;mask-size:contain;}
+  .mnav-user-info{flex:1;min-width:0;}
+  .mnav-user-name{font-size:15px;font-weight:800;color:#111827;}
+  .mnav-user-role{font-size:12.5px;font-weight:700;color:var(--role-color-deep);margin-top:2px;}
+  .mnav-bell{background:none;border:none;padding:4px;color:#374151;cursor:pointer;flex:none;display:flex;}
+  .mnav-bell svg{width:19px;height:19px;}
+  .mnav-user-actions{display:flex;gap:9px;margin-bottom:14px;}
+  .mnav-user-actions button{flex:1;height:44px;border-radius:10px;font-family:inherit;font-weight:700;font-size:13.5px;
+    cursor:pointer;border:1px solid #E2E5EA;background:#fff;color:#333;}
+  .mnav-edit{border-color:var(--brand-blue-deep) !important;color:var(--brand-blue-deep) !important;}
+  .mnav-timer{display:flex;align-items:center;justify-content:space-between;background:#F7F8FA;border-radius:10px;padding:9px 12px;}
+
+  /* ---------- 계정 유형별 아바타 아이콘 (학교=일반교과교사: 학사모 / 체험처=진로체험처: 건물 / 운영자: 톱니바퀴) ---------- */
+  .role-school .acct-avatar::before,.role-school .mnav-user-avatar::before{
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M12%204%203%209l9%205%209-5-9-5Z%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M7%2011.5V16c0%201.5%202.24%203%205%203s5-1.5%205-3v-4.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M21%209v5%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M12%204%203%209l9%205%209-5-9-5Z%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M7%2011.5V16c0%201.5%202.24%203%205%203s5-1.5%205-3v-4.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M21%209v5%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+  }
+  .role-partner .acct-avatar::before,.role-partner .mnav-user-avatar::before{
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M4%2021V4a1%201%200%200%201%201-1h8a1%201%200%200%201%201%201v17%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14%2010h5a1%201%200%200%201%201%201v10%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M3%2021h18%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M7%207h2M7%2011h2M7%2015h2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M4%2021V4a1%201%200%200%201%201-1h8a1%201%200%200%201%201%201v17%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M14%2010h5a1%201%200%200%201%201%201v10%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M3%2021h18%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M7%207h2M7%2011h2M7%2015h2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+  }
+  .role-admin .acct-avatar::before,.role-admin .mnav-user-avatar::before{
+    -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3Cpath%20d%3D%22M12%202v3M12%2019v3M4.2%204.2l2.1%202.1M17.7%2017.7l2.1%202.1M2%2012h3M19%2012h3M4.2%2019.8l2.1-2.1M17.7%206.3l2.1-2.1%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+    mask-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3Cpath%20d%3D%22M12%202v3M12%2019v3M4.2%204.2l2.1%202.1M17.7%2017.7l2.1%202.1M2%2012h3M19%2012h3M4.2%2019.8l2.1-2.1M17.7%206.3l2.1-2.1%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E");
+  }
+  .mnav-timer-time{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;color:#374151;}
+  .mnav-timer-time svg{width:14px;height:14px;}
+
+  /* ---------- header.css 기본값(비로그인) 오버라이드 ---------- */
+  .mnav-toggle.current{color:var(--ink);margin-right: 20px;}
+
+  @media (max-width:760px){
+    .acct-timer,.acct-wrap{display:none;}
+  }

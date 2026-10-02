@@ -1,0 +1,107 @@
+/* ===================================================================
+   program-search-card.css — 진로체험 프로그램 검색 (AI 검색 · 카드배너형)
+   program-search.css 를 먼저 불러 검색창/칩/조건바/필터패널/사이드바/
+   페이지네이션 스타일을 공유한 뒤, 결과 리스팅(.psrch-listing/.psrch-row)
+   대신 카드 그리드(.psrch-card-grid/.psrch-card)만 이 파일에서 새로 정의한다.
+
+   2차 수정: 배너를 그라디언트 블롭에서 실제 사이트의 "아이콘 타일형"
+   카드 참고 이미지에 맞춰 단색+도트 패턴 배경 + 중앙 큰 픽토그램
+   아이콘으로 바꾸고, 본문에 대상학년(초/중/고) 배지와 기관/지역/신청
+   범위를 아이콘과 함께 한 줄씩 나열하는 정보 리스트를 추가했다.
+   =================================================================== */
+
+  /* ---------- 카드 그리드 ---------- */
+  .psrch-card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(266px,1fr));
+    gap:18px 16px;}
+
+  /* ---------- 카드 ---------- */
+  .psrch-card{position:relative;display:flex;flex-direction:column;background:#fff;
+    border:1px solid var(--border-gray);border-radius:18px;overflow:hidden;cursor:pointer;
+    opacity:0;transform:translateY(10px);animation:psrch-card-in .4s cubic-bezier(.16,1,.3,1) forwards;
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease;}
+  .psrch-card:hover{transform:translateY(-5px);box-shadow:0 16px 32px -8px rgba(15,23,42,.16);
+    border-color:transparent;}
+  @keyframes psrch-card-in{to{opacity:1;transform:translateY(0);}}
+
+  /* ---------- 배너: 단색 + 도트 패턴 + 중앙 큰 아이콘 ---------- */
+  .psrch-card-banner{position:relative;height:116px;flex:none;display:flex;align-items:center;
+    justify-content:center;overflow:hidden;
+    background-image:radial-gradient(rgba(255,255,255,.22) 1.4px,transparent 1.4px);
+    background-size:13px 13px;}
+
+  .psrch-card-banner.green{background-color:#1B9C63;}
+  .psrch-card-banner.orange{background-color:#F0653A;}
+  .psrch-card-banner.purple{background-color:#5C4FE0;}
+  .psrch-card-banner.teal{background-color:#0BA79E;}
+  .psrch-card-banner.indigo{background-color:#4A63E0;}
+  .psrch-card-banner.blue{background-color:#1477D1;}
+  .psrch-card-banner.magenta{background-color:#9C3FD1;}
+  .psrch-card-banner.pink{background-color:#E23E82;}
+
+  .psrch-card-banner-icon{position:relative;z-index:1;width:46px;height:46px;color:#fff;
+    opacity:.96;filter:drop-shadow(0 2px 5px rgba(0,0,0,.12));}
+
+  .psrch-card-banner .status-pill{position:absolute;z-index:2;top:11px;right:11px;flex:none;}
+  .psrch-card-banner .status-pill.open{background:rgba(255,255,255,.95);color:var(--status-blue-text);}
+  .psrch-card-banner .status-pill.closed{background:rgba(255,255,255,.85);color:var(--status-gray-text);}
+
+  .psrch-card-match{position:absolute;z-index:2;top:11px;left:11px;display:inline-flex;
+    align-items:center;gap:4px;background:rgba(14,21,38,.82);color:#fff;border-radius:999px;
+    padding:5px 9px 5px 7px;font-size:10px;font-weight:800;white-space:nowrap;}
+  .psrch-card-match svg{width:10px;height:10px;color:#FFC664;}
+
+  /* ---------- 본문 ---------- */
+  .psrch-card-body{flex:1;display:flex;flex-direction:column;gap:9px;padding:14px 16px 16px;}
+
+  .psrch-card-toprow{display:flex;align-items:center;justify-content:space-between;gap:8px;}
+  .psrch-card-grades{display:flex;gap:4px;flex:none;}
+  .psrch-grade-pill{width:21px;height:21px;border-radius:50%;display:flex;align-items:center;
+    justify-content:center;font-size:10.5px;font-weight:800;color:#fff;flex:none;}
+  .psrch-grade-pill.el{background:#FF8A3D;}
+  .psrch-grade-pill.ms{background:#3B82F6;}
+  .psrch-grade-pill.hs{background:#22B573;}
+
+  .psrch-card-title{margin:0;font-size:14.5px;font-weight:700;color:var(--ink);line-height:1.4;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.8em;}
+
+  .psrch-card-meta-list{display:flex;flex-direction:column;gap:5px;}
+  .psrch-card-meta-row{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--gray-text-2);
+    white-space:nowrap;overflow:hidden;}
+  .psrch-card-meta-row span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .psrch-card-meta-row svg{width:13px;height:13px;flex:none;color:#9CA3AF;}
+
+  .psrch-card-divider{border-top:1px dashed var(--border-gray);margin-top:2px;}
+
+  .psrch-card-foot{margin-top:auto;padding-top:10px;display:flex;align-items:center;
+    justify-content:space-between;gap:8px;font-size:12px;color:var(--gray-text);}
+  .psrch-card-foot strong{color:var(--ink);font-weight:700;}
+  .psrch-card-detail-link{display:inline-flex;align-items:center;gap:3px;background:none;border:none;
+    font-family:inherit;font-size:12px;font-weight:700;color:var(--gray-text-2);cursor:pointer;padding:0;
+    transition:color .15s ease,gap .15s ease;}
+  .psrch-card-detail-link svg{width:12px;height:12px;transition:transform .15s ease;}
+  .psrch-card:hover .psrch-card-detail-link{color:var(--brand-blue);}
+  .psrch-card:hover .psrch-card-detail-link svg{transform:translateX(3px);}
+
+  /* ---------- 카드 스켈레톤 ---------- */
+  .psrch-card-skel{background:#fff;border:1px solid var(--border-gray);border-radius:18px;overflow:hidden;}
+  .psrch-card-skel .psrch-card-skel-banner{height:116px;background:var(--border-gray);position:relative;overflow:hidden;}
+  .psrch-card-skel-body{padding:16px;display:flex;flex-direction:column;gap:10px;}
+  .psrch-card-skel-line{height:12px;background:var(--border-gray);border-radius:6px;position:relative;overflow:hidden;}
+  .psrch-card-skel .psrch-card-skel-banner::after,
+  .psrch-card-skel-line::after{content:'';position:absolute;inset:0;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.65),transparent);
+    animation:psrch-shimmer 1.5s infinite;}
+
+  /* ---------- 반응형 ---------- */
+  @media (max-width:960px){
+    .psrch-card-grid{grid-template-columns:repeat(auto-fill,minmax(230px,1fr));}
+  }
+  @media (max-width:640px){
+    .psrch-card-grid{grid-template-columns:1fr 1fr;gap:12px;}
+    .psrch-card-title{font-size:13.5px;}
+    .psrch-card-banner{height:96px;}
+    .psrch-card-banner-icon{width:38px;height:38px;}
+  }
+  @media (max-width:420px){
+    .psrch-card-grid{grid-template-columns:1fr;}
+  }

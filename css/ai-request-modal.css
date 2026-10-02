@@ -1,0 +1,114 @@
+/* ===================================================================
+   ai-request-modal.css — AI 맞춤형 프로그램 요청 모달 전용 스타일
+   main.css 를 먼저 불러 색상 변수(:root)와 폰트를 공유한 뒤 사용한다.
+   .modal-backdrop 는 main.css(AI 검색 팝업) / program-request-detail.css 와
+   공용으로 사용. 모달 셸(헤더/바디/푸터 레이아웃)은 pr-detail-modal 과
+   동일한 구조를 따르되, 이 모달만의 폼 필드 스타일을 추가했다.
+   Figma "2026꿈길main" 파일 SFR-001 페이지 > "Modal card"(node 2520:1631) 기반.
+   =================================================================== */
+
+  /* ---------- 데모 트리거 화면 (실서비스에서는 검색 결과 빈 상태 화면을 사용) ---------- */
+  .areq-demo-body{background:var(--surface);min-height:100vh;padding:48px 20px;}
+  .areq-demo-wrap{max-width:640px;margin:0 auto;}
+  .areq-demo-label{margin:0 0 14px;font-size:13px;font-weight:700;color:var(--gray-text);}
+  .areq-demo-empty{background:#fff;border:1px solid var(--border-gray);border-radius:16px;
+    padding:48px 24px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;}
+  .areq-demo-empty p{margin:0;font-size:14.5px;color:var(--gray-text-2);}
+  .areq-demo-trigger{display:inline-flex;align-items:center;gap:8px;background:var(--brand-blue);
+    color:#fff;border:none;border-radius:11px;padding:12px 20px;font-family:inherit;font-size:14px;
+    font-weight:700;cursor:pointer;transition:background .15s ease;}
+  .areq-demo-trigger svg{width:16px;height:16px;}
+  .areq-demo-trigger:hover{background:var(--brand-blue-deep);}
+
+  /* ---------- 모달 셸 ---------- */
+  .ai-req-modal{
+    display:none;position:fixed;left:50%;top:50%;transform:translate(-50%,-50%) scale(.97);opacity:0;
+    width:min(589px,calc(100% - 32px));max-height:min(760px,calc(100% - 64px));
+    background:#fff;border-radius:20px;box-shadow:0 20px 60px rgba(15,23,41,.28);
+    z-index:210;flex-direction:column;overflow:hidden;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .ai-req-modal.open{display:flex;transform:translate(-50%,-50%) scale(1);opacity:1;}
+
+  .ai-req-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex:none;
+    padding:22px 24px 18px;}
+  .ai-req-head-text h3{margin:0 0 5px;font-size:16px;font-weight:800;color:var(--ink);}
+  .ai-req-head-text p{margin:0;font-size:11.5px;line-height:1.55;color:var(--gray-text);}
+  .ai-req-close{border:none;background:var(--surface);color:var(--gray-text);width:26px;height:26px;
+    border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;}
+  .ai-req-close svg{width:13px;height:13px;}
+  .ai-req-close:hover{background:var(--border-gray);color:var(--ink);}
+
+  .ai-req-body{flex:1;overflow-y:auto;padding:0 24px 4px;min-height:0;display:flex;flex-direction:column;gap:16px;}
+
+  /* ---------- 공통 필드 레이아웃 ---------- */
+  .ai-req-field{display:flex;flex-direction:column;gap:7px;}
+  .ai-req-label{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--ink);}
+  .ai-req-required{color:var(--brand-blue);}
+  .ai-req-optchip{background:var(--status-gray-bg);color:var(--status-gray-text);border-radius:999px;
+    padding:2px 7px;font-size:9.5px;font-weight:500;}
+  .ai-req-sublabel{font-size:10.5px;font-weight:500;color:var(--gray-text);}
+
+  .ai-req-input,
+  .ai-req-select{font-family:inherit;font-size:12px;color:var(--ink);background:#fff;
+    border:1.4px solid var(--border-gray);border-radius:11px;padding:9px 12px;width:100%;outline:none;
+    transition:border-color .15s ease,box-shadow .15s ease;}
+  .ai-req-input::placeholder{color:var(--gray-text);}
+  .ai-req-input:focus,
+  .ai-req-select:focus{border-color:var(--brand-blue);box-shadow:0 0 0 3px rgba(29,138,230,.12);}
+  #aiReqQuery{border-radius:14px;padding:9px 12px;}
+
+  .ai-req-row2{display:flex;align-items:center;gap:8px;}
+  .ai-req-row2 .ai-req-select,
+  .ai-req-row2 .ai-req-input{flex:1;min-width:0;}
+  .ai-req-range .ai-req-tilde{flex:none;font-size:12px;color:var(--gray-text);}
+
+  .ai-req-select{appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7280' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 10px center;background-size:14px;padding-right:30px;}
+
+  /* ---------- 대면 구분 (세그먼트 토글) ---------- */
+  .ai-req-seg{display:flex;gap:6px;width:100%;}
+  .ai-req-seg-btn{flex:1;font-family:inherit;font-size:11.5px;font-weight:500;color:var(--gray-text);
+    background:#fff;border:1.4px solid var(--border-gray);border-radius:10px;padding:9px 0;cursor:pointer;
+    transition:all .15s ease;}
+  .ai-req-seg-btn:hover{border-color:var(--brand-blue);}
+  .ai-req-seg-btn.active{background:var(--status-blue-bg);color:var(--status-blue-text);
+    border-color:var(--brand-blue);font-weight:700;}
+
+  /* ---------- 키워드(태그) ---------- */
+  .ai-req-tag-input{font-family:inherit;font-size:12px;color:var(--ink);background:#fff;
+    border:1.4px solid var(--border-gray);border-radius:999px;padding:9px 16px;width:100%;outline:none;
+    transition:border-color .15s ease,box-shadow .15s ease;}
+  .ai-req-tag-input::placeholder{color:var(--gray-text);}
+  .ai-req-tag-input:focus{border-color:var(--brand-blue);box-shadow:0 0 0 3px rgba(29,138,230,.12);}
+  .ai-req-tag-input:disabled{background:var(--surface);color:var(--gray-text);cursor:not-allowed;}
+
+  .ai-req-tags{display:flex;flex-wrap:wrap;gap:6px;}
+  .ai-req-tag-chip{display:inline-flex;align-items:center;gap:5px;background:var(--status-blue-bg);
+    color:var(--status-blue-text);border-radius:999px;padding:5px 8px 5px 11px;font-size:11px;font-weight:700;}
+  .ai-req-tag-remove{border:none;background:none;color:var(--status-blue-text);font-size:10px;
+    cursor:pointer;padding:0;line-height:1;opacity:.75;}
+  .ai-req-tag-remove:hover{opacity:1;}
+
+  /* ---------- 하단 취소 / 제출 ---------- */
+  .ai-req-foot{flex:none;display:flex;justify-content:flex-end;gap:8px;padding:16px 24px 20px;}
+  .ai-req-btn-cancel{background:#fff;border:1.4px solid var(--border-gray);color:var(--gray-text);
+    border-radius:11px;padding:10px 16px;font-family:inherit;font-size:12.5px;font-weight:700;cursor:pointer;}
+  .ai-req-btn-cancel:hover{background:var(--surface);color:var(--ink);}
+  .ai-req-btn-submit{display:inline-flex;align-items:center;gap:6px;background:var(--brand-blue);color:#fff;
+    border:none;border-radius:11px;padding:10px 18px;font-family:inherit;font-size:12.5px;font-weight:700;
+    cursor:pointer;transition:background .15s ease;}
+  .ai-req-btn-submit:hover{background:var(--brand-blue-deep);}
+
+  @media (max-width:520px){
+    .ai-req-modal{width:calc(100% - 20px);}
+    .ai-req-head{padding:18px 18px 14px;}
+    .ai-req-body{padding:0 18px 4px;}
+    .ai-req-foot{padding:14px 18px 18px;flex-direction:column-reverse;}
+    .ai-req-btn-cancel,
+    .ai-req-btn-submit{width:100%;justify-content:center;}
+    .ai-req-row2{flex-direction:column;align-items:stretch;}
+    .ai-req-range{flex-direction:row;align-items:center;}
+    .ai-req-range .ai-req-input{width:auto;}
+  }

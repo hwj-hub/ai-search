@@ -1,0 +1,49 @@
+/* ===================================================================
+   ai-search-list.css — AI 검색 · 통합형 (B안 사이드바 쉘 + A안 검색/리스트)
+   페이지 레이아웃(.aichat-page/.aichat-layout/.aichat-sidebar)은
+   ai-search-chat.css를, 검색창·툴바·리스트·페이지네이션(.psrch-*)은
+   program-search.css를 그대로 재사용한다. 이 파일은 그 둘을 하나의
+   "AI 답변 카드"로 감싸는 데 필요한 최소한의 클래스만 추가한다.
+   =================================================================== */
+
+.aslist-page{padding-top:48px;}
+
+.aslist-main{flex:none;width:1074px;max-width:100%;display:flex;flex-direction:column;gap:18px;}
+
+/* 검색창은 program-search.css의 .psrch-ai-searchbar를 그대로 쓰되
+   카드 바깥, 리스트형 사이드바 레이아웃 안에 놓이므로 좌우 마진만 리셋 */
+.aslist-main .psrch-ai-searchbar{margin:0;}
+
+.aslist-answer-area{display:flex;flex-direction:column;gap:16px;}
+
+.aslist-answer-card{background:#fff;border:1px solid var(--border-gray);border-radius:22px;
+  padding:24px 26px 20px;box-shadow:0 14px 34px -16px rgba(20,30,51,.18);
+  opacity:0;animation:aichat-in .35s ease forwards;}
+
+.aslist-ai-row{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+.aslist-avatar{flex:none;width:26px;height:26px;border-radius:999px;background:var(--brand-blue);
+  display:flex;align-items:center;justify-content:center;color:#fff;}
+.aslist-avatar svg{width:14px;height:14px;}
+.aslist-ai-row strong{font-size:13px;color:var(--ink);}
+.aslist-answer-tag{margin-left:2px;font-size:10px;font-weight:800;letter-spacing:.04em;
+  color:var(--gray-text);background:var(--surface);border-radius:999px;padding:2px 8px;}
+
+/* 상태 문장(답변 과정) — program-search.css의 .psrch-status 타이핑 연출을 그대로 사용 */
+.aslist-answer-card .psrch-status{margin:0 0 14px;}
+
+/* 카드 안에서는 바깥 여백 없이 꽉 차게 */
+.aslist-answer-card .psrch-toolbar{margin-bottom:12px;}
+.aslist-answer-card .psrch-listing{margin-bottom:4px;}
+.aslist-answer-card .psrch-pagination{margin-top:20px;}
+
+.aslist-divider{height:1px;background:var(--border-gray);margin:0 0 14px;}
+
+/* "+" 새 대화 시작 시 보여줄 빈 상태 (아이콘+안내문, 흰 카드) */
+.aslist-empty{background:#fff;border:1px solid var(--border-gray);border-radius:22px;
+  padding:60px 26px;display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--gray-text);font-size:13px;}
+.aslist-empty svg{width:34px;height:34px;color:#C7CBD1;}
+
+@media (max-width:1100px){
+  .aslist-main{width:100%;}
+}

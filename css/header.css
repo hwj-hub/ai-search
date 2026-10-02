@@ -1,0 +1,195 @@
+/* ===================================================================
+   header.css — 상단 devbar + 헤더(로고/유틸/네비)+ 모바일 전체메뉴.
+   index.html, index_login.html 공통 사용 — 중복 막기 위해 분리됨.
+   로그인 상태 전용 스타일(계정 영역 등)은 login.css 참조.
+   =================================================================== */
+
+  /* ---------- DEV BAR ---------- */
+  .devbar{background:linear-gradient(90deg,#498EFF 0%,#5442BA 51%,#180A68 100%);text-align:center;padding:7px 20px;font-size:13px;font-weight:500;color:#fff;}
+
+  /* ---------- HEADER ---------- */
+  header.site{background:#fff;border-bottom:1px solid #E7EAF2;position:relative;z-index:100;}
+  .hd-top{display:flex;align-items:center;justify-content:space-between;padding:14px 0;max-width:1180px;margin:0 auto;flex-wrap:wrap;gap:12px;}
+  .logo{display:flex;align-items:center;}
+  .logo-mark{width:45px;border-radius:11px;flex:none;display:block;object-fit:contain; margin: 0 10px 0 20px;}
+  .logo-text{display:flex;flex-direction:column;line-height:1.15;}
+  .logo-text .brand{
+    font-weight:800;font-size:22px;letter-spacing:-0.5px;
+    background:linear-gradient(90deg,#db605b 0%,#f29c78 25%,#f4d879 40%,#a1d6aa 55%,#7dbdeb 70%,#948af3 85%,#a89dfd 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .logo-text .sub{ background:linear-gradient(90deg,#db605b 0%,#f29c78 25%,#f4d879 40%,#a1d6aa 55%,#7dbdeb 70%,#948af3 85%,#a89dfd 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent; display:flex;align-items:baseline;font-weight:700;letter-spacing:-0.85px;margin-top:1px;white-space:nowrap;}
+  .logo-text .sub .sub-em,
+
+  .logo-text .sub .sub-em{font-size:18px;letter-spacing:-1.1px;}
+  .logo-text .sub .sub-rest{font-size:14px;}
+  .util{display:flex;align-items:center;gap:14px;font-size:13px;font-weight:500;color:var(--accent-slate);}
+  .util .btn-signup{background:var(--accent-slate);color:#fff;font-weight:700;padding:8px 16px;border-radius:999px;border:none;cursor:pointer;font-size:13px;font-family:inherit;}
+  .util .login-icon{display:none;align-items:center;justify-content:center;color:var(--accent-slate);}
+  .util .login-icon svg{width:22px;height:22px;}
+
+  /* ---------- 화면크기(글자 크기) 드롭다운 ---------- */
+  .ss-wrap{position:relative;display:flex;align-items:center;}
+  .screen-size{display:flex;align-items:center;gap:4px;color:inherit;text-decoration:none;cursor:pointer;font-weight:500;}
+  .ss-chev{display:inline-block;font-size:9px;transition:transform .2s ease;}
+  .ss-wrap.open .ss-chev{transform:rotate(180deg);}
+  .screen-size-dropdown{
+    position:absolute;top:calc(100% + 12px);right:0;width:172px;background:#fff;
+    border:1px solid #E2E5EA;border-radius:12px;box-shadow:0 12px 28px rgba(15,23,41,.16);
+    padding:8px;display:flex;flex-direction:column;gap:2px;z-index:80;
+    opacity:0;visibility:hidden;transform:translateY(-6px);pointer-events:none;
+    transition:opacity .18s ease,transform .18s ease,visibility 0s linear .18s;
+  }
+  .screen-size-dropdown.open{
+    opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;
+    transition:opacity .18s ease,transform .18s ease;
+  }
+  .ss-option{display:flex;align-items:center;gap:10px;width:100%;border:none;background:none;padding:7px 8px;
+    border-radius:8px;font-family:inherit;font-size:13.5px;font-weight:600;color:#333;cursor:pointer;text-align:left;}
+  .ss-option:hover{background:#F3F5F8;}
+  .ss-option .ss-ga{width:26px;height:26px;flex:none;border:1px solid #D8DCE3;border-radius:6px;
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#4A5160;line-height:1;box-sizing:border-box;}
+  .ss-option.is-active{background:var(--brand-blue-deep);color:#fff;}
+  .ss-option.is-active:hover{background:var(--brand-blue-deep);}
+  .ss-option.is-active .ss-ga{border-color:transparent;color:#fff;}
+  .ss-divider{height:1px;background:#EDEFF2;margin:5px 2px;}
+  .ss-reset{display:flex;align-items:center;gap:6px;width:100%;border:none;background:none;padding:7px 8px;
+    border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;color:#6B7280;cursor:pointer;}
+  .ss-reset:hover{background:#F3F5F8;color:#374151;}
+  .hamburger-btn{display:none;background:none;border:none;padding:4px;cursor:pointer;color:var(--ink);align-items:center;justify-content:center;}
+  .hamburger-btn svg{width:24px;height:24px;}
+  nav.main-nav{max-width:1180px;margin:0 auto;display:flex;gap:36px;padding:8px 0 0;font-weight:700;font-size:16px;flex-wrap:wrap;}
+  nav.main-nav a{color:var(--ink);position:relative;}
+  nav.main-nav > .nav-item > a:hover{color:var(--brand-blue-deep);font-weight:800;}
+  .nav-item{position:relative;padding-bottom:14px;}
+  .submenu{
+    display:none;position:absolute;top:100%;left:0;margin-top:0;background:#fff;border:1px solid #ECEDF0;
+    border-radius:16px;box-shadow:0 10px 30px rgba(15,23,41,.12);padding:6px 0;z-index:45;
+    min-width:190px;width:max-content;max-width:280px;
+  }
+  .nav-item:hover .submenu{display:block;}
+  .submenu a,.submenu .info{display:flex;align-items:center;gap:6px;padding:15px 22px;font-size:15px;font-weight:500;
+    color:#1A1F2B;white-space:nowrap;}
+  .submenu a:not(:last-child){border-bottom:1px solid #F1F2F4;}
+  .submenu a:hover{color:var(--brand-blue-deep);font-weight:700;background:#F7F9FB;}
+  .submenu .info{color:var(--gray-text);white-space:normal;}
+  .submenu .ext{width:13px;height:13px;color:#98A1B3;flex:none;}
+  .submenu .plus{color:var(--brand-blue-deep);font-weight:800;margin-left:1px;}
+
+  /* 3-depth flyout (진로체험 운영 우수사례) */
+  .submenu-flyout{align-items:stretch;width:max-content;max-width:none;padding:6px 0;}
+  .nav-item:hover .submenu-flyout{display:flex;}
+  .submenu-flyout .submenu-col{display:flex;flex-direction:column;min-width:190px;border-right:1px solid #E5E8EB;}
+  .submenu-flyout .submenu-col a{border-bottom:1px solid #F1F2F4;}
+  .submenu-flyout .submenu-col a:last-child{border-bottom:none;}
+  .submenu-flyout .flyout-col{display:none;flex-direction:column;min-width:200px;padding:0 22px 0 20px;
+    margin-left:0;}
+  .submenu-flyout.open .flyout-col{display:flex;}
+  .submenu-flyout.open .flyout-col a{border-bottom:none;padding:15px 0;}
+  .flyout-trigger .chev{font-size:13px;color:#98A1B3;flex:none;margin-left:auto;padding-left:10px;}
+  .flyout-trigger:hover{color:var(--brand-blue-deep);}
+  .flyout-trigger:hover .chev{color:var(--brand-blue-deep);}
+  .submenu-flyout.open .flyout-trigger{color:var(--brand-blue-deep);font-weight:700;}
+  .submenu-flyout.open .flyout-trigger .chev{color:var(--brand-blue-deep);}
+
+  /* 마이페이지 서브메뉴 (학교운영자 계정) — 3depth(진로체험 운영 우수사례)와 같은 한 박스 구조.
+     왼쪽엔 항상 보이는 메인 목록(submenu-col), 오른쪽엔 활성화된 항목의 하위 목록(flyout-col)이
+     펼쳐진다 — 기본 .submenu-flyout 레이아웃(왼쪽 목록 border-right, 오른쪽 목록 padding)을 그대로 쓴다. */
+  .mypage-menu .flyout-col.active{display:flex;}
+  .mypage-menu .mypage-link{display:block;padding:15px 22px;font-size:15px;font-weight:500;color:#1A1F2B;
+    text-decoration:none;white-space:nowrap;border-bottom:1px solid #F1F2F4;}
+  .mypage-menu .mypage-link:hover{color:var(--brand-blue-deep);font-weight:700;background:#F7F9FB;}
+  .mypage-toggle{display:flex;align-items:center;width:100%;text-align:left;background:none;border:none;
+    padding:15px 22px;font-size:15px;font-weight:500;font-family:inherit;color:#1A1F2B;cursor:pointer;white-space:nowrap;
+    border-bottom:1px solid #F1F2F4;}
+  .mypage-toggle:last-child{border-bottom:none;}
+  .mypage-toggle .chev{font-size:13px;color:#98A1B3;flex:none;margin-left:auto;padding-left:10px;}
+  .mypage-toggle:hover{color:var(--brand-blue-deep);font-weight:700;background:#F7F9FB;}
+  .mypage-toggle:hover .chev{color:var(--brand-blue-deep);}
+  .mypage-toggle.active{color:var(--brand-blue-deep);font-weight:700;}
+  .mypage-toggle.active .chev{color:var(--brand-blue-deep);}
+
+  /* ---------- MOBILE NAV (전체 메뉴 드롭다운) ---------- */
+  .mobile-nav-panel{
+    display: none;
+    position: fixed;
+    top: 0;
+    /* left: 0; */
+    right: 0;
+    margin-top: 0;
+    background: #fff;
+    border-top: 1px solid #EEF0F3;
+    /* border-radius: 0 0 20px 20px; */
+    box-shadow: 0 14px 30px rgba(15, 23, 41, .14);
+    padding: 16px 18px 22px;
+    flex-direction: column;
+    width: auto;
+    /* max-height: calc(100vh - 64px); */
+    overflow-y: auto;
+    z-index: 120;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition: opacity .2s ease, transform .2s ease;
+    width: 90%;
+    height: 100vh;
+  }
+  .mobile-nav-panel.open{display:flex;opacity:1;transform:translateY(0);}
+  .mnav-head{display:flex;align-items:center;gap:10px;padding-bottom:14px;}
+  .mnav-search{
+    flex:1;display:flex;align-items:center;gap:8px;min-width:0;
+    background:#F6F8FB;border:none;border-radius:999px;height:44px;padding:0 16px;
+    font-family:inherit;font-size:13.5px;font-weight:600;color:#5B6472;cursor:pointer;text-align:left;
+  }
+  .mnav-search svg{width:18px;height:18px;flex:none;color:var(--brand-blue-deep);}
+  .mnav-search span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .mnav-close{
+    width:38px;height:38px;flex:none;border:1.5px dashed #C7CCD6;border-radius:9px;background:none;
+    display:flex;align-items:center;justify-content:center;color:#333;cursor:pointer;
+  }
+  .mnav-close svg{width:16px;height:16px;}
+  .mnav-auth{display:flex;gap:9px;padding-bottom:16px;}
+  .mnav-auth button{flex:1;height:46px;border-radius:10px;font-family:inherit;font-weight:700;font-size:14.5px;cursor:pointer;}
+  .mnav-login{background:var(--brand-blue-deep);border:none;color:#fff;}
+  .mnav-signup{background:#fff;border:1.5px solid var(--brand-blue-deep);color:var(--brand-blue-deep);}
+  .mnav-group{border-bottom:1px solid #F1F2F4;}
+  .mnav-group:last-child{border-bottom:none;}
+  .mnav-toggle{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;
+    background:none;border:none;padding:15px 4px;font-weight:700;font-size:15.5px;color:var(--ink);
+    cursor:pointer;font-family:inherit;text-align:left;transition:color .15s ease;
+  }
+  .mnav-toggle.current{color:var(--brand-blue-deep);margin-right: 20px;}
+  .mnav-toggle .chev{width:14px;height:14px;flex:none;color:#98A1B3;transition:transform .2s ease,color .15s ease;}
+  .mnav-group.open > .mnav-toggle .chev{transform:rotate(180deg);}
+  /* 메뉴가 펼쳐진(선택된) 상태 강조표시 */
+  .mnav-group.open > .mnav-toggle{color:var(--brand-blue-deep);}
+  .mnav-group.open > .mnav-toggle .chev{color:var(--brand-blue-deep);}
+  .mnav-sub{display:none;flex-direction:column;padding:0 0 8px 10px;}
+  .mnav-group.open > .mnav-sub{display:flex;}
+  .mnav-sub a,.mnav-sub .mnav-info{display:flex;align-items:center;gap:6px;padding:11px 12px;font-size:14px;
+    font-weight:500;color:#333;border-radius:8px;}
+  .mnav-sub a:hover{background:#F7F9FB;color:var(--brand-blue-deep);font-weight:700;}
+  .mnav-sub a.selected{background:#EAF3FF;color:var(--brand-blue-deep);font-weight:700;}
+  .mnav-sub .mnav-info{color:var(--gray-text);}
+  .mnav-sub .ext{width:12px;height:12px;color:#98A1B3;flex:none;}
+  .mnav-group.nested{border-bottom:none;margin:2px 0;border-radius:8px;}
+  .mnav-group.nested > .mnav-toggle{padding:11px 12px;font-weight:600;font-size:14px;background:#FAFBFC;border-radius:8px;}
+  .mnav-group.nested.open{background:#EAF3FF;}
+  .mnav-group.nested.open > .mnav-toggle{background:none;font-weight:800;}
+  .mnav-group.nested .mnav-sub{padding-left:22px;}
+  .mobile-nav-backdrop{display:none;position:fixed;inset:0;background:rgba(15,23,41,.25);z-index:110;}
+  .mobile-nav-backdrop.open{display:block;}
+
+  @media (max-width:760px){
+    .hd-top{padding:5px 16px;}
+    .logo{flex-direction: column;align-items:flex-start;gap:3px;display:flex;}
+    .logo-text{align-items:flex-start;}
+    .logo-mark{width:45px; height: 45px; margin-left: 0;}
+    nav.main-nav{display:none;}
+    .util{gap:2px;}
+    .util .login-text,.util .screen-size{display:none;}
+    .util .login-icon{display:inline-flex;}
+    .util .btn-signup{display:none;}
+    .hamburger-btn{display:inline-flex;}
+  }

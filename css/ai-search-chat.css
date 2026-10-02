@@ -1,0 +1,179 @@
+/* ===================================================================
+   ai-search-chat.css — AI 검색 · B안 (채팅형)
+   좌측 "이전 대화" 사이드바(GPT/Claude 스타일) + 우측 채팅창.
+   main.css 의 색상 토큰(--brand-blue, --ink, --gray-text, --border-gray 등)을
+   그대로 재사용한다. 실제 API 호출은 없는 클라이언트 목업.
+   =================================================================== */
+
+.aichat-body{background:var(--surface);min-height:100vh;}
+
+.aichat-page{max-width:1480px;margin:0 auto;padding:56px 24px 80px;}
+
+.aichat-header{text-align:center;margin-bottom:36px;}
+.aichat-title{margin:0 0 8px;font-size:28px;font-weight:800;color:var(--ink);
+  display:flex;align-items:center;justify-content:center;gap:10px;}
+.aichat-spark{color:var(--brand-blue);}
+.aichat-subtitle{margin:0;font-size:14px;color:var(--gray-text);}
+
+.aichat-layout{display:flex;align-items:flex-start;justify-content:center;gap:24px;}
+
+/* ---------- 사이드바: 이전 대화 ---------- */
+.aichat-sidebar{flex:none;width:300px;align-self:stretch;background:#fff;
+  border:1px solid var(--border-gray);border-radius:22px;
+  box-shadow:0 14px 34px -16px rgba(20,30,51,.18);
+  padding:18px;display:flex;flex-direction:column;gap:14px;}
+
+.aichat-sidebar-head{display:flex;align-items:center;justify-content:space-between;}
+.aichat-sidebar-head h2{margin:0;font-size:14px;font-weight:700;color:var(--ink);}
+.aichat-new-btn{width:26px;height:26px;border-radius:999px;border:none;cursor:pointer;
+  background:#EAF5FF;color:var(--brand-blue);font-size:16px;font-weight:700;line-height:1;
+  display:flex;align-items:center;justify-content:center;transition:background .15s ease,transform .15s ease;}
+.aichat-new-btn:hover{background:#D9ECFF;transform:scale(1.06);}
+
+.aichat-sidebar::before{content:'';display:block;height:1px;background:var(--border-gray);
+  margin:0 -18px;order:1;}
+.aichat-sidebar-list{display:flex;flex-direction:column;gap:4px;overflow-y:auto;max-height:560px;}
+
+.aichat-history-item{display:flex;flex-direction:column;gap:4px;padding:10px 12px;
+  border-radius:10px;border:none;background:none;text-align:left;cursor:pointer;
+  font-family:inherit;width:100%;transition:background .15s ease;}
+.aichat-history-item:hover{background:#F7F9FB;}
+.aichat-history-item.active{background:#EAF5FF;}
+.aichat-history-item p{margin:0;font-size:12px;line-height:1.45;color:var(--ink);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.aichat-history-item.active p{color:var(--brand-blue-deep);font-weight:600;}
+.aichat-history-item span{font-size:10.5px;color:var(--gray-text);}
+
+/* ---------- 채팅창 ---------- */
+.aichat-window{flex:none;width:1074px;max-width:100%;background:#fff;
+  border:1px solid var(--border-gray);border-radius:22px;overflow:hidden;
+  box-shadow:0 14px 34px -16px rgba(20,30,51,.18);
+  display:flex;flex-direction:column;}
+
+.aichat-head{display:flex;align-items:center;gap:12px;padding:16px 18px;
+  border-bottom:1px solid var(--border-gray);}
+.aichat-avatar{flex:none;width:32px;height:32px;border-radius:999px;background:var(--brand-blue);
+  color:#fff;display:flex;align-items:center;justify-content:center;}
+.aichat-avatar svg{width:18px;height:18px;}
+.aichat-titles{display:flex;flex-direction:column;}
+.aichat-titles strong{font-size:14.5px;color:var(--ink);}
+.aichat-titles span{font-size:11px;color:var(--gray-text);margin-top:2px;}
+
+.aichat-body{min-height:360px;max-height:560px;overflow-y:auto;padding:20px 18px;
+  display:flex;flex-direction:column;gap:14px;}
+
+.aichat-empty{margin:auto;text-align:center;color:var(--gray-text);font-size:13px;
+  display:flex;flex-direction:column;align-items:center;gap:8px;padding:40px 0;}
+.aichat-empty svg{width:34px;height:34px;color:#C7CBD1;}
+
+/* 사용자 메시지 */
+.aichat-msg-user{align-self:flex-end;max-width:72%;background:var(--brand-blue);color:#fff;
+  border-radius:16px 16px 4px 16px;padding:12px 15px;font-size:13px;line-height:1.5;
+  opacity:0;animation:aichat-in .3s ease forwards;}
+
+/* 진행 상태(실시간 검색중) — 4단계 세로 타임라인 카드 */
+.aichat-progress{align-self:stretch;background:#fff;border:1px solid var(--border-gray);
+  border-radius:16px;padding:18px 20px 10px;opacity:0;animation:aichat-in .25s ease forwards;}
+
+.aichat-progress-head{display:flex;align-items:center;gap:8px;margin-bottom:14px;}
+.aichat-progress-head svg{width:17px;height:17px;color:var(--gray-text-2);flex:none;}
+.aichat-progress-head strong{font-size:14px;font-weight:700;color:var(--ink);flex:1;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.aichat-progress-head strong.typing::after{content:'▎';margin-left:2px;color:var(--brand-blue);
+  animation:aichat-blink .8s infinite;}
+.aichat-progress-head time{font-size:11px;color:var(--gray-text);flex:none;}
+
+.aichat-progress-step{display:flex;gap:12px;border-radius:10px;padding:8px 10px;
+  transition:background .2s ease;}
+.aichat-progress-step.active{background:#F2F6FB;}
+
+.aichat-progress-icon-col{display:flex;flex-direction:column;align-items:center;flex:none;}
+.aichat-progress-icon{width:22px;height:22px;border-radius:999px;flex:none;
+  display:flex;align-items:center;justify-content:center;border:2px solid var(--border-gray);
+  background:#fff;transition:border-color .2s ease,background .2s ease;}
+.aichat-progress-icon svg{width:12px;height:12px;color:#fff;opacity:0;transition:opacity .15s ease;}
+.aichat-progress-step.done .aichat-progress-icon{border-color:var(--brand-blue);background:var(--brand-blue);}
+.aichat-progress-step.done .aichat-progress-icon svg{opacity:1;}
+.aichat-progress-step.active .aichat-progress-icon{border-color:var(--brand-blue);background:#fff;}
+.aichat-progress-icon-dot{width:8px;height:8px;border-radius:999px;background:var(--brand-blue);
+  opacity:0;transition:opacity .15s ease;}
+.aichat-progress-step.active .aichat-progress-icon-dot{opacity:1;animation:aichat-pulse 1.1s infinite;}
+
+.aichat-progress-line{width:1.5px;flex:1;min-height:22px;margin-top:3px;
+  border-left:1.5px dashed var(--border-gray);transition:border-color .2s ease;}
+.aichat-progress-step.done + .aichat-progress-step .aichat-progress-line,
+.aichat-progress-step.done .aichat-progress-line{border-left-color:var(--brand-blue);}
+
+.aichat-progress-content{flex:1;padding-bottom:12px;min-width:0;}
+.aichat-progress-title-row{display:flex;align-items:baseline;justify-content:space-between;gap:10px;}
+.aichat-progress-title{font-size:13.5px;font-weight:700;color:var(--gray-text);}
+.aichat-progress-step.active .aichat-progress-title,
+.aichat-progress-step.done .aichat-progress-title{color:var(--ink);}
+.aichat-progress-time{font-size:10.5px;color:var(--gray-text);flex:none;opacity:0;}
+.aichat-progress-step.active .aichat-progress-time,
+.aichat-progress-step.done .aichat-progress-time{opacity:1;}
+.aichat-progress-sub{margin:3px 0 0;font-size:12px;color:var(--gray-text);line-height:1.5;}
+
+/* AI 메시지 */
+.aichat-msg-ai{align-self:stretch;opacity:0;animation:aichat-in .35s ease forwards;}
+.aichat-ai-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;}
+.aichat-ai-row .mini-avatar{width:18px;height:18px;border-radius:999px;background:var(--brand-blue);
+  color:#fff;display:flex;align-items:center;justify-content:center;flex:none;}
+.aichat-ai-row .mini-avatar svg{width:11px;height:11px;}
+.aichat-ai-row strong{font-size:12px;color:var(--ink);}
+.aichat-answer-text{margin:0 0 14px;font-size:13.5px;color:var(--ink);line-height:1.55;min-height:1.55em;}
+.aichat-answer-text.typing::after{content:'▎';margin-left:2px;color:var(--brand-blue);
+  animation:aichat-blink .8s infinite;}
+
+.aichat-mini-cards{display:flex;flex-direction:column;gap:10px;}
+.aichat-mini-card{border:1px solid var(--border-gray);border-radius:12px;padding:12px 14px;
+  display:flex;flex-direction:column;gap:7px;transition:border-color .15s ease,box-shadow .15s ease;
+  opacity:0;transform:translateY(6px);animation:aichat-in .3s ease forwards;}
+.aichat-mini-card:hover{border-color:var(--brand-blue);box-shadow:0 6px 16px -8px rgba(29,138,230,.3);}
+.aichat-mini-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+.aichat-mini-title{font-size:13px;font-weight:700;color:var(--ink);line-height:1.4;min-height:1.4em;}
+.aichat-mini-title.typing::after{content:'▎';margin-left:2px;color:var(--brand-blue);
+  animation:aichat-blink .8s infinite;}
+.aichat-mini-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  opacity:0;transition:opacity .25s ease;}
+.aichat-mini-meta.shown{opacity:1;}
+.aichat-mini-meta span{font-size:11.5px;color:var(--gray-text-2);}
+.aichat-mini-top .aichat-badge.status-open,
+.aichat-mini-top .aichat-badge.status-closed{opacity:0;transition:opacity .25s ease;}
+.aichat-mini-top .aichat-badge.shown{opacity:1;}
+
+.aichat-badge{flex:none;border-radius:999px;padding:3px 9px;font-size:10px;font-weight:700;white-space:nowrap;}
+.aichat-badge.status-open{background:var(--status-blue-bg);color:var(--status-blue-text);}
+.aichat-badge.status-closed{background:var(--status-gray-bg);color:var(--status-gray-text);}
+.aichat-badge.type{background:#EAF5FC;color:#1477D1;}
+
+@keyframes aichat-in{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+@keyframes aichat-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(.7);}}
+@keyframes aichat-blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* ---------- 추천 칩 ---------- */
+.aichat-suggestions{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 14px;
+  border-top:1px solid var(--border-gray);}
+.aichat-chip{border:1px solid var(--border-gray);background:#fff;border-radius:999px;
+  padding:7px 14px;font-size:12px;color:var(--ink);cursor:pointer;font-family:inherit;
+  transition:border-color .15s ease,color .15s ease,background .15s ease;}
+.aichat-chip:hover{border-color:var(--brand-blue);color:var(--brand-blue-deep);background:#F5FAFF;}
+
+/* ---------- 입력창 ---------- */
+.aichat-inputbar{display:flex;gap:10px;padding:14px 18px;border-top:1px solid var(--border-gray);}
+.aichat-inputbar input{flex:1;border:1px solid var(--border-gray);border-radius:999px;
+  padding:12px 18px;font-size:13.5px;font-family:inherit;color:var(--ink);background:var(--surface);
+  outline:none;transition:border-color .15s ease,background .15s ease;}
+.aichat-inputbar input:focus{border-color:var(--brand-blue);background:#fff;}
+.aichat-send-btn{flex:none;display:inline-flex;align-items:center;gap:6px;border:none;cursor:pointer;
+  background:var(--brand-blue);color:#fff;border-radius:999px;padding:0 20px;font-size:13px;
+  font-weight:700;font-family:inherit;transition:background .15s ease;}
+.aichat-send-btn svg{width:15px;height:15px;}
+.aichat-send-btn:hover{background:var(--brand-blue-deep);}
+
+/* ---------- 반응형 ---------- */
+@media (max-width:1100px){
+  .aichat-layout{flex-direction:column;align-items:stretch;}
+  .aichat-sidebar{width:100%;max-height:220px;}
+  .aichat-window{width:100%;}
+}
